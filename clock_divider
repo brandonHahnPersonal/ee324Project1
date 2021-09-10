@@ -1,0 +1,42 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: Brandon Hahn (Following Along with Dr. Murray)
+// 
+// Create Date: 09/08/2021 11:49:25 AM
+// Design Name: 
+// Module Name: myClockDivider -> clock_divider
+// Project Name: assignment1
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module clock_divider #(parameter DIV = 100000/2)(output divClockOut, input clockIn, reset);    //(n/2) = (100MHz/1kHz)/2 => update every half constraint_mode
+    reg [31:0] count;
+    always @ (posedge clockIn, reset)    //Use star to list all that matter in the sensitivity list
+    begin
+        if(reset)
+        begin
+            count <= 32'd0; //32 bits of decimal zero
+            divClockOut <= 1'b0; //One bit of binary zero
+        end        
+        else
+        begin
+            count <= count + 1;
+            if (count>= DIV-1)
+            begin
+                divClockOut <= ~divClockOut;
+                count <= 0;
+            end
+        end
+    end
+endmodule
