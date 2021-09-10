@@ -27,25 +27,42 @@ module four_to_four_counter(
     output [3:0] digit_one_out,
     output [3:0] digit_two_out,
     output [3:0] digit_three_out
-    );
-    
-    reg four_bit_counter;
+    );    
     
  always @ (posedge clock_input, reset)    //Use star to list all that matter in the sensitivity list
     begin
-        if(reset)
+        if(reset)   //if reset is pressed, reset all digits to zero
         begin
-            counter_output <= 4'b0000; //if reset is pressed. Reset counter
+            digit_zero_out <= 3'b0000;
+            digit_one_out <= 3'b0000;
+            digit_two_out <= 3'b0000;
+            digit_three_out <= 3'b0000;
         end        
         else
         begin
-            clock_input <= clock_input + 1'b01; //else add one to counter
-            if (counter_output>= 4'b1001)
+            digit_zero_out <= digit_zero_out + 3'b0001; //assign the least significant digit to the smallest counter
+            if (digit_zero_out>= 3'b1010)
             begin
-                counter_output <= 4'b0000;    //if count is decimal 4 or higher, reset to zero
+                digit_zero_out <= 3'b0000;    //if count is decimal 10 or higher, reset to zero    
+                digit_one_out <= digit_one_out + 3'b0001;    //if reset the digit zero, increment digit 1 
+                if (digit_one_out>= 3'b1010)    //if digit 1 is decimal 10 or higher, reset to zero
+                begin
+                    digit_one_out <= 3'b0000;    //if count is decimal 10 or higher, reset to zero    
+                    digit_two_out <= digit_two_out + 3'b001;    //if reset the digit 1, increment digit 2
+                    if (digit_two_out>= 3'b1010)    //if digit 2 is decimal 10 or higher, reset to zero
+                    begin
+                        digit_two_out <= 3'b0000;    //if count is decimal 10 or higher, reset to zero    
+                        digit_three_out <= digit_three_out + 3'b001;    //if reset the digit 2, increment digit 3
+                        if (digit_three_out>= 3'b1010)    //if digit 3 is decimal 10 or higher, reset to zero
+                        begin
+                            digit_three_out <= 3'b0000;    //if count is decimal 10 or higher, reset to zero    
+                        end
+                    end
+                end
             end
         end
     end    
     
     
 endmodule
+
