@@ -23,14 +23,14 @@
 module four_to_four_counter(
     input clock_input,
     input reset,
-    output [3:0] digit_zero_out,
-    output [3:0] digit_one_out,
-    output [3:0] digit_two_out,
-    output [3:0] digit_three_out
+    output reg[3:0] digit_zero_out,
+    output reg[3:0] digit_one_out,
+    output reg[3:0] digit_two_out,
+    output reg[3:0] digit_three_out
     );    
     
- always @ (posedge clock_input, reset)    //Use star to list all that matter in the sensitivity list
-    begin
+ always @ (posedge clock_input, posedge reset)    //Use star to list all that matter in the sensitivity list
+    begin    
         if(reset)   //if reset is pressed, reset all digits to zero
         begin
             digit_zero_out <= 3'b0000;
@@ -40,6 +40,7 @@ module four_to_four_counter(
         end        
         else
         begin
+        //$display (digit_three_out,digit_two_out,digit_one_outdigit_zero_out);
             digit_zero_out <= digit_zero_out + 3'b0001; //assign the least significant digit to the smallest counter
             if (digit_zero_out>= 3'b1010)
             begin
@@ -65,4 +66,3 @@ module four_to_four_counter(
     
     
 endmodule
-
