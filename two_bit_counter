@@ -23,9 +23,9 @@
 module two_bit_counter(
     input clock_input,
     input reset,
-    output [1:0] counter_output
+    output reg [1:0] counter_output
     );
-    always @ (posedge clock_input, reset)    //Use star to list all that matter in the sensitivity list
+    always @ (posedge clock_input, posedge reset)    //Use star to list all that matter in the sensitivity list
     begin
         if(reset)
         begin
@@ -33,7 +33,7 @@ module two_bit_counter(
         end        
         else
         begin
-            clock_input <= clock_input + 1'b01; //else add one to counter
+            counter_output <= counter_output + 1'b01; //else add one to counter
             if (counter_output>= 3'b100)
             begin
                 counter_output <= 2'b00;    //if count is decimal 4 or higher, reset to zero
