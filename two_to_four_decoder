@@ -1,0 +1,38 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 09/09/2021 04:49:05 PM
+// Design Name: 
+// Module Name: two_to_four_decoder
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module two_to_four_decoder(
+    input [1:0] counter_input,
+    output [3:0] anode
+    );
+    
+    always @ (*)
+    begin
+        case(counter_input)
+        2'b00 : anode <= 1110;
+        2'b01 : anode <= 1101;
+        2'b10 : anode <= 1011;
+        2'b11 : anode <= 0111;
+        endcase
+    end
+    
+endmodule
