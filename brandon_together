@@ -1,0 +1,50 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 09/09/2021 10:03:37 PM
+// Design Name: 
+// Module Name: brandon_together
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module brandon_together(
+    input reset_button,
+    input clockIn,
+    output [3:0]anode,
+     output cathode_a,
+ output cathode_b,
+ output cathode_c,
+ output cathode_d,
+ output cathode_e,
+ output cathode_f,
+ output cathode_g ,
+ output cathode_dp
+    );
+    
+    wire  clockOut;
+    wire [1:0] two_counter_out;
+    wire [3:0] dig0,dig1,dig2,dig3;
+    wire [3:0]four_mux_out;
+    
+    clock_divider clock_div_mod_one(clockOut,clockIn,reset_button);
+    two_bit_counter two_bit_counter_mod_one(clockOut,reset_button,two_counter_out);
+    four_to_four_counter four_counter_mod_one(clockOut,reset_button,dig0,dig1,dig2,dig3);
+    four_to_1_mux four_one_mux_mod_one(dig0,dig1,dig2,dig3,four_mux_out,two_counter_out);
+    two_to_four_decoder two_four_decoder_mod_one(two_counter_out,anode[3:0]);
+    seven_segment_decoder sseg_mod(four_mux_out,cathode_a,cathode_b,cathode_c,cathode_d,cathode_e,cathode_f,cathode_g,cathode_dp);
+    
+    
+endmodule
