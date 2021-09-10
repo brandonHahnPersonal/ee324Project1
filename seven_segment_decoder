@@ -22,13 +22,14 @@
 
 module seven_segment_decoder(
     input [3:0] decoder_input,
-    output cathode_a,
-    output cathode_b,
-    output cathode_c,
-    output cathode_d,
-    output cathode_e,
-    output cathode_f,
-    output cathode_g
+    output reg cathode_a,
+    output reg cathode_b,
+    output reg cathode_c,
+    output reg cathode_d,
+    output reg cathode_e,
+    output reg cathode_f,
+    output reg cathode_g,
+    output reg cathode_dp
     );
      always @ (*)
     begin
