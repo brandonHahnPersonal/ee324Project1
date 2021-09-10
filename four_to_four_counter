@@ -1,0 +1,51 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 09/09/2021 06:20:13 PM
+// Design Name: 
+// Module Name: four_to_four_counter
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module four_to_four_counter(
+    input clock_input,
+    input reset,
+    output [3:0] digit_zero_out,
+    output [3:0] digit_one_out,
+    output [3:0] digit_two_out,
+    output [3:0] digit_three_out
+    );
+    
+    reg four_bit_counter;
+    
+ always @ (posedge clock_input, reset)    //Use star to list all that matter in the sensitivity list
+    begin
+        if(reset)
+        begin
+            counter_output <= 4'b0000; //if reset is pressed. Reset counter
+        end        
+        else
+        begin
+            clock_input <= clock_input + 1'b01; //else add one to counter
+            if (counter_output>= 4'b1001)
+            begin
+                counter_output <= 4'b0000;    //if count is decimal 4 or higher, reset to zero
+            end
+        end
+    end    
+    
+    
+endmodule
