@@ -1,0 +1,124 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 09/09/2021 04:49:05 PM
+// Design Name: 
+// Module Name: seven_segment_decoder
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module seven_segment_decoder(
+    input [3:0] decoder_input,
+    output cathode_a,
+    output cathode_b,
+    output cathode_c,
+    output cathode_d,
+    output cathode_e,
+    output cathode_f,
+    output cathode_g
+    );
+     always @ (*)
+    begin
+    cathode_a <= 1;
+    cathode_b <= 1;
+    cathode_c <= 1;
+    cathode_d <= 1;
+    cathode_e <= 1;
+    cathode_f <= 1;
+    cathode_g <= 1;
+    cathode_dp <= 1;
+        case(decoder_input)
+        4'b0000: //decimal 0
+            begin 
+            cathode_a <= 0;
+            cathode_b <= 0;
+            cathode_c <= 0;
+            cathode_d <= 0;
+            cathode_e <= 0;
+            cathode_f <= 0;
+            end
+        4'b0001: //decimal 1
+            begin 
+            cathode_b <= 0;
+            cathode_c <= 0;
+            end
+        4'b0010: //decimal 2
+            begin 
+            cathode_a <= 0;
+            cathode_b <= 0;
+            cathode_d <= 0;
+            cathode_e <= 0;
+            cathode_g <= 0;
+            end
+        4'b0011: //decimal 3
+            begin 
+            cathode_a <= 0;
+            cathode_b <= 0;
+            cathode_c <= 0;
+            cathode_d <= 0;
+            cathode_g <= 0;
+            end
+        4'b0100: //decimal 4
+            begin 
+            cathode_b <= 0;
+            cathode_c <= 0;
+            cathode_f <= 0;
+            cathode_g <= 0;
+            end
+        4'b0101: //decimal 5
+            begin 
+            cathode_a <= 0;
+            cathode_c <= 0;
+            cathode_d <= 0;
+            cathode_f <= 0;
+            cathode_g <= 0;
+            end            
+        4'b0110: //decimal 6
+            begin 
+            cathode_a <= 0;
+            cathode_c <= 0;
+            cathode_d <= 0;
+            cathode_e <= 0;
+            cathode_f <= 0;
+            cathode_g <= 0;
+            end 
+        4'b0111: //decimal 7
+            begin 
+            cathode_a <= 0;
+            cathode_b <= 0;
+            cathode_c <= 0;
+            end                  
+        4'b1000: //decimal 8
+            begin 
+            cathode_a <= 0;
+            cathode_b <= 0;
+            cathode_c <= 0;
+            cathode_d <= 0;
+            cathode_e <= 0;
+            cathode_f <= 0;
+            cathode_g <= 0;
+            end                 
+        4'b1001: //decimal 9
+            begin 
+            cathode_a <= 0;
+            cathode_b <= 0;
+            cathode_c <= 0;
+            cathode_f <= 0;
+            cathode_g <= 0;
+            end            
+        endcase 
+    end //end of always block
+endmodule
