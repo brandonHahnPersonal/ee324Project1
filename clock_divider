@@ -20,9 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module clock_divider #(parameter DIV = 100000/2)(output divClockOut, input clockIn, reset);    //(n/2) = (100MHz/1kHz)/2 => update every half constraint_mode
+module clock_divider #(parameter DIV = 10000000/*2*/)(output reg divClockOut, input clockIn, reset);    //(n/2) = (100MHz/1kHz)/2 => update every half constraint_mode
     reg [31:0] count;
-    always @ (posedge clockIn, reset)    //Use star to list all that matter in the sensitivity list
+    always @ (posedge clockIn, posedge reset)    //Use star to list all that matter in the sensitivity list
     begin
         if(reset)
         begin
