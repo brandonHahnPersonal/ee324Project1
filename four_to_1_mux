@@ -25,7 +25,7 @@ module four_to_1_mux(
     input [3:0] digit_one,
     input [3:0] digit_two,
     input [3:0] digit_three,
-    output [3:0] four_mux_out,
+    output reg[3:0] four_mux_out,
     input [1:0] select_line
     );
     
