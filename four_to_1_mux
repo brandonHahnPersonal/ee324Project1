@@ -1,0 +1,41 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: Brandon Hahn
+// 
+// Create Date: 09/09/2021 04:49:05 PM
+// Design Name: 
+// Module Name: four_to_1_mux
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module four_to_1_mux(
+    input [3:0] digit_zero,
+    input [3:0] digit_one,
+    input [3:0] digit_two,
+    input [3:0] digit_three,
+    output [3:0] four_mux_out,
+    input [1:0] select_line
+    );
+    
+    always @ (*)
+    begin : MUX
+        case(select_line)   //the case depends on the select line input
+        2'b00 : four_mux_out <= digit_zero; //IF the select line is 00, then the output is assigned the input from constraint_mode
+        2'b01 : four_mux_out <= digit_one;
+        2'b10 : four_mux_out <= digit_two;
+        2'b11 : four_mux_out <= digit_three;
+        endcase
+    end
+endmodule
